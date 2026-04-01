@@ -1,0 +1,1700 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>LAWYALTY – Rechtsorientierung. Kein Anwalt, aber an deiner Seite.</title>
+<meta name="description" content="LAWYALTY hilft dir, rechtliche Situationen, Briefe und Dokumente verständlich einzuordnen – klar, menschlich und ohne Kanzlei-Hürde."/>
+<meta name="robots" content="index, follow"/>
+<meta property="og:title" content="LAWYALTY – Rechtsorientierung. Kein Anwalt, aber an deiner Seite."/>
+<meta property="og:description" content="LAWYALTY hilft dir, rechtliche Situationen, Briefe und Dokumente verständlich einzuordnen – klar, menschlich und ohne Kanzlei-Hürde."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://lawyalty.de"/>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml"/>
+
+<style>
+/* ════════════════════════════════════════════════
+   LAWYALTY · Clean Dark
+   Dark base · Subtle purple accent · Apple SF Pro
+════════════════════════════════════════════════ */
+
+:root {
+  /* Dark palette */
+  --bg:          #111113;
+  --bg-raised:   #1a1a1e;
+  --bg-card:     #1e1e22;
+  --bg-hover:    #232328;
+  --surface:     #f5f5f7;
+  --surface-2:   #fafafa;
+
+  /* Purple accent — very desaturated, cool */
+  --accent:      #a78bfa;
+  --accent-dim:  #8b74d6;
+  --accent-soft: rgba(167,139,250,.08);
+  --accent-mid:  rgba(167,139,250,.15);
+  --accent-glow: rgba(167,139,250,.04);
+
+  /* Text */
+  --white:       #f5f5f7;
+  --text:        rgba(245,245,247,.85);
+  --text-2:      rgba(245,245,247,.55);
+  --text-3:      rgba(245,245,247,.3);
+  --ink:         #1d1d1f;
+  --ink-2:       #424245;
+  --mid:         #86868b;
+
+  /* Borders */
+  --border:      rgba(255,255,255,.06);
+  --border-2:    rgba(255,255,255,.1);
+  --border-l:    rgba(0,0,0,.08);
+
+  /* Utility */
+  --green:       #34c759;
+  --green-soft:  rgba(52,199,89,.12);
+  --red:         #ff453a;
+
+  --f-display: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
+  --f-body:    -apple-system, BlinkMacSystemFont, 'SF Pro Text', system-ui, sans-serif;
+
+  --r-sm:  8px;
+  --r-md:  12px;
+  --r-lg:  16px;
+  --r-xl:  24px;
+
+  --ease: cubic-bezier(.25,.1,.25,1);
+  --max:  1080px;
+  --pad:  clamp(1.5rem, 5vw, 3rem);
+}
+
+/* ── RESET ──────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; font-size: 16px; }
+body { background: var(--bg); color: var(--text); font-family: var(--f-body); overflow-x: hidden; line-height: 1.6; }
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { cursor: pointer; border: none; background: none; font-family: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* ── TYPE ───────────────────────────────────── */
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--white);
+}
+h1 { font-size: clamp(2.6rem, 5.5vw, 4.5rem); }
+h2 { font-size: clamp(1.9rem, 3.8vw, 3rem); }
+h3 { font-size: clamp(1.05rem, 1.5vw, 1.2rem); font-weight: 600; }
+em { font-style: normal; color: var(--text-2); }
+
+/* ── LAYOUT ─────────────────────────────────── */
+.container { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+.section { padding: clamp(5rem, 10vw, 8rem) 0; }
+
+/* ── BUTTONS ────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .8rem 1.6rem; border-radius: 980px;
+  font-family: var(--f-body); font-size: .875rem; font-weight: 500;
+  letter-spacing: .01em; white-space: nowrap;
+  transition: all .2s var(--ease);
+}
+.btn-primary {
+  background: var(--white); color: var(--ink);
+}
+.btn-primary:hover { background: rgba(245,245,247,.9); transform: scale(1.02); }
+.btn-secondary {
+  background: transparent; color: var(--text-2);
+  border: 1px solid var(--border-2);
+}
+.btn-secondary:hover { color: var(--white); border-color: rgba(255,255,255,.2); background: rgba(255,255,255,.04); }
+.btn-accent {
+  background: var(--accent); color: var(--bg);
+  font-weight: 600;
+}
+.btn-accent:hover { background: var(--accent-dim); transform: scale(1.02); }
+.btn-lg { padding: 1rem 2.2rem; font-size: .95rem; }
+
+/* ── HEADER ─────────────────────────────────── */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 1000; padding: 1rem 0;
+  background: rgba(17,17,19,.7);
+  backdrop-filter: blur(20px) saturate(1.8);
+  -webkit-backdrop-filter: blur(20px) saturate(1.8);
+  border-bottom: 1px solid transparent;
+  transition: border-color .3s;
+}
+.site-header.scrolled { border-color: var(--border); }
+.nav-inner {
+  max-width: var(--max); margin: 0 auto; padding: 0 var(--pad);
+  display: flex; align-items: center; gap: 2rem;
+}
+.logo { display: flex; align-items: center; gap: .6rem; margin-right: auto; }
+.logo-mark {
+  font-family: var(--f-display); font-weight: 700; font-size: 1.2rem;
+  color: var(--white); letter-spacing: .06em;
+}
+.nav-links { display: flex; gap: 1.8rem; }
+.nav-links a {
+  font-size: .82rem; font-weight: 500; color: var(--text-3);
+  transition: color .2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta { margin-left: .5rem; }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; padding: 6px; }
+.nav-toggle span { display: block; width: 20px; height: 1.5px; background: var(--white); border-radius: 2px; transition: all .3s var(--ease); }
+.nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ── HERO ───────────────────────────────────── */
+.hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 120px var(--pad) 80px;
+  text-align: center;
+  background: var(--bg);
+  position: relative; overflow: hidden;
+}
+/* Subtle purple atmospheric glow */
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 800px; height: 600px;
+  top: 30%; left: 50%; transform: translate(-50%, -50%);
+  background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column;
+  align-items: center; gap: 1.5rem;
+  max-width: 720px;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: .72rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-3);
+  opacity: 1;
+}
+.badge-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+}
+.hero-h1 {
+  opacity: 1;
+}
+.hero-h1 .soft {
+  color: var(--text-2);
+  font-weight: 300;
+}
+.hero-sub {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: var(--text-2); font-weight: 400;
+  max-width: 50ch; line-height: 1.7;
+  opacity: 1;
+}
+.hero-card {
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 1.5rem 1.75rem;
+  width: 100%; max-width: 480px;
+  margin-top: .5rem;
+  opacity: 1;
+}
+.card-label {
+  font-size: .7rem; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--text-3);
+  margin-bottom: .75rem; text-align: left;
+}
+.chip-row { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: 1rem; }
+.chip {
+  padding: .4rem .9rem; border-radius: 980px;
+  font-size: .8rem; font-weight: 500;
+  border: 1px solid var(--border-2);
+  color: var(--text-3); cursor: pointer;
+  transition: all .2s var(--ease);
+  background: transparent; font-family: var(--f-body);
+}
+.chip.active, .chip:hover {
+  background: var(--accent-mid);
+  border-color: rgba(167,139,250,.3);
+  color: var(--accent);
+}
+.hero-submit {
+  width: 100%;
+  background: var(--white); color: var(--ink);
+  border-radius: var(--r-md); padding: .8rem;
+  font-family: var(--f-body); font-size: .875rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center; gap: .4rem;
+  transition: all .2s var(--ease);
+}
+.hero-submit:hover { background: rgba(245,245,247,.9); }
+.hero-actions {
+  display: flex; gap: .75rem; align-items: center;
+  opacity: 1;
+}
+
+/* ── ANIMATIONS ─────────────────────────────── */
+@keyframes fade-in { to { opacity: 1; } }
+@keyframes fade-up { to { opacity: 1; transform: translateY(0); } }
+.hero-h1, .hero-sub, .hero-card, .hero-actions { transform: none; opacity: 1; }
+.reveal { opacity: 1; transform: none; transition: opacity .6s var(--ease), transform .6s var(--ease); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── BRIDGE ─────────────────────────────────── */
+.bridge {
+  background: var(--bg-raised);
+  padding: 3.5rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.bridge-inner { display: flex; justify-content: center; gap: clamp(2rem, 6vw, 5rem); flex-wrap: wrap; }
+.bridge-stat { text-align: center; }
+.bridge-stat-num {
+  font-family: var(--f-display); font-size: 2.4rem; font-weight: 700;
+  color: var(--white); line-height: 1;
+}
+.bridge-stat-label { font-size: .78rem; color: var(--text-3); margin-top: .4rem; max-width: 160px; line-height: 1.5; }
+
+/* ── SECTION SHARED (light sections) ────────── */
+.light-section { background: var(--surface); }
+.light-section h2, .light-section h3 { color: var(--ink); }
+.light-section .section-body { color: var(--mid); }
+.section-eyebrow {
+  font-size: .7rem; font-weight: 600; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: .6rem; display: block;
+}
+.section-h2 { margin-bottom: .75rem; }
+.section-body { font-size: 1rem; color: var(--text-2); max-width: 48ch; line-height: 1.75; }
+.section-header-block { margin-bottom: 3.5rem; }
+
+/* ── PROBLEM ────────────────────────────────── */
+.problem-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--border-l);
+  border-radius: var(--r-xl); overflow: hidden;
+  border: 1px solid var(--border-l);
+}
+.p-card {
+  background: var(--surface-2); padding: 2rem;
+  transition: background .2s;
+}
+.p-card:hover { background: #fff; }
+.p-icon {
+  width: 40px; height: 40px;
+  background: var(--surface);
+  border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink); margin-bottom: 1rem;
+}
+.p-card h3 { color: var(--ink); margin-bottom: .4rem; }
+.p-card p { font-size: .84rem; color: var(--mid); line-height: 1.7; }
+
+/* ── SOLUTION ───────────────────────────────── */
+.solution-section { background: var(--bg); }
+.solution-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center;
+}
+.sol-list { display: flex; flex-direction: column; gap: .6rem; margin: 1.5rem 0 1.5rem; }
+.sol-item {
+  display: flex; align-items: flex-start; gap: .65rem;
+  font-size: .9rem; color: var(--text); line-height: 1.6;
+}
+.sol-check {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: .15rem;
+}
+.sol-disclaimer {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-size: .75rem; color: var(--text-3);
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 980px; padding: .35rem .9rem;
+}
+
+/* Document visual */
+.doc-visual { position: relative; height: 360px; }
+.dv-card {
+  position: absolute; border-radius: var(--r-lg);
+  background: var(--bg-card); padding: 1.5rem;
+  box-shadow: 0 2px 16px rgba(0,0,0,.3);
+  border: 1px solid var(--border);
+}
+.dv-card--a { width: 250px; height: 290px; bottom: 0; right: 20px; transform: rotate(3deg); background: var(--bg-raised); }
+.dv-card--b { width: 260px; height: 300px; bottom: 14px; left: 30px; transform: rotate(-2deg); }
+.dv-card--c { width: 270px; height: 310px; top: 0; left: 0; z-index: 2; border-color: rgba(167,139,250,.15); }
+.dv-line { height: 7px; border-radius: 4px; background: rgba(255,255,255,.06); margin-bottom: .6rem; }
+.dv-line--title { height: 10px; width: 55%; background: rgba(255,255,255,.08); }
+.dv-line--short { width: 60%; }
+.dv-badge {
+  display: inline-flex; align-items: center; gap: .35rem;
+  background: var(--green-soft); border-radius: 980px; padding: .2rem .65rem;
+  font-size: .7rem; font-weight: 600; color: var(--green); margin-bottom: .9rem;
+}
+.dv-anno {
+  background: rgba(255,255,255,.04); border-radius: var(--r-sm);
+  padding: .5rem .7rem; margin-bottom: .5rem;
+  border-left: 2px solid var(--accent);
+}
+.dv-anno-title { font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.dv-anno-text { font-size: .72rem; color: var(--text-2); margin-top: .15rem; }
+
+/* ── FEATURES ───────────────────────────────── */
+.features-section { background: var(--bg-raised); }
+.feat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+.feat-card {
+  background: var(--bg-card); border-radius: var(--r-xl);
+  padding: 2rem; border: 1px solid var(--border);
+  transition: all .25s var(--ease);
+}
+.feat-card:hover { border-color: var(--border-2); }
+.feat-card--accent {
+  background: var(--accent-soft); border-color: rgba(167,139,250,.12);
+}
+.feat-card--accent .feat-title { color: var(--accent); }
+.feat-icon {
+  width: 40px; height: 40px; border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.1rem; background: rgba(255,255,255,.05);
+}
+.feat-title { color: var(--white); margin-bottom: .35rem; }
+.feat-desc { font-size: .84rem; color: var(--text-2); line-height: 1.7; }
+
+/* ── HOW ────────────────────────────────────── */
+.how-section { background: var(--bg); }
+.steps-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0; position: relative;
+}
+.steps-grid::before {
+  content: ''; position: absolute;
+  top: 24px; left: calc(12.5% + 24px); right: calc(12.5% + 24px);
+  height: 1px; background: var(--border);
+}
+.step-item { padding: 0 1.25rem; text-align: center; }
+.step-num {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--bg-card); color: var(--accent);
+  border: 1px solid var(--border-2);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--f-display); font-size: .82rem; font-weight: 700;
+  margin: 0 auto 1.25rem; position: relative; z-index: 1;
+}
+.step-h { font-size: .95rem; color: var(--white); margin-bottom: .4rem; }
+.step-p { font-size: .82rem; color: var(--text-2); line-height: 1.7; }
+
+/* ── TRUST ──────────────────────────────────── */
+.trust-section { background: var(--bg-raised); }
+.trust-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: .75rem; margin-bottom: 3rem; }
+.trust-pillar {
+  background: var(--bg-card); border-radius: var(--r-xl);
+  padding: 1.75rem; border: 1px solid var(--border);
+  text-align: center; transition: all .25s var(--ease);
+}
+.trust-pillar:hover { border-color: var(--border-2); }
+.trust-pillar-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: rgba(255,255,255,.05); margin: 0 auto .9rem;
+  display: flex; align-items: center; justify-content: center; color: var(--text-2);
+}
+.trust-pillar h3 { font-size: .9rem; margin-bottom: .4rem; line-height: 1.35; }
+.trust-pillar p { font-size: .78rem; color: var(--text-2); line-height: 1.65; }
+.trust-quote {
+  background: var(--bg-card); border-radius: var(--r-xl);
+  padding: 2.5rem 3rem;
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent);
+  max-width: 660px; margin: 0 auto;
+}
+.trust-quote-mark {
+  font-family: Georgia, serif; font-size: 4rem; line-height: .7;
+  color: rgba(255,255,255,.06); margin-bottom: .75rem; display: block;
+}
+.trust-quote p {
+  font-family: var(--f-display); font-size: 1.1rem;
+  font-weight: 400; color: var(--text); line-height: 1.7; margin-bottom: 1rem;
+}
+.trust-quote-author { font-size: .78rem; color: var(--text-3); }
+.trust-quote-note {
+  display: inline-block; margin-top: .25rem;
+  font-size: .68rem; color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 980px; padding: .15rem .6rem;
+}
+
+/* ── DISCLAIMER ─────────────────────────────── */
+.disclaimer-section { background: var(--bg); }
+.disclaimer-card {
+  background: var(--bg-raised); border-radius: var(--r-xl);
+  border: 1px solid var(--border); overflow: hidden;
+}
+.disclaimer-top {
+  background: var(--bg-card); padding: 2rem 2.5rem;
+  display: flex; align-items: center; gap: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+.disclaimer-shield {
+  width: 48px; height: 48px; flex-shrink: 0;
+  background: var(--accent-soft); border-radius: var(--r-sm);
+  display: flex; align-items: center; justify-content: center;
+}
+.disclaimer-top h2 { font-size: 1.35rem; }
+.disclaimer-top p { font-size: .84rem; color: var(--text-3); margin-top: .2rem; }
+.disclaimer-body { display: grid; grid-template-columns: 1fr 1fr; }
+.disc-col { padding: 1.75rem 2rem; }
+.disc-col:first-child { border-right: 1px solid var(--border); }
+.disc-col-title {
+  font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; margin-bottom: .75rem;
+  display: flex; align-items: center; gap: .4rem;
+}
+.disc-col--no .disc-col-title { color: var(--red); }
+.disc-col--yes .disc-col-title { color: var(--green); }
+.disc-col ul li {
+  font-size: .84rem; color: var(--text-2); padding: .35rem 0;
+  border-bottom: 1px solid var(--border);
+  padding-left: 1rem; position: relative;
+}
+.disc-col ul li:last-child { border-bottom: none; }
+.disc-col ul li::before { content: '–'; position: absolute; left: 0; color: var(--text-3); }
+.disclaimer-footer {
+  background: var(--bg-card); padding: 1.1rem 2rem;
+  font-size: .78rem; color: var(--text-3); line-height: 1.7;
+  border-top: 1px solid var(--border);
+}
+
+/* ── CTA ────────────────────────────────────── */
+.cta-section {
+  padding: clamp(5rem, 10vw, 8rem) 0;
+  text-align: center;
+  position: relative; overflow: hidden;
+  background: var(--bg-raised);
+}
+/* Subtle purple glow */
+.cta-section::after {
+  content: '';
+  position: absolute;
+  width: 700px; height: 400px;
+  bottom: -100px; left: 50%; transform: translateX(-50%);
+  background: radial-gradient(ellipse, rgba(167,139,250,.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-inner { position: relative; z-index: 1; max-width: 600px; margin: 0 auto; }
+.cta-h2 {
+  font-size: clamp(2rem, 4.5vw, 3.2rem);
+  margin-bottom: .75rem;
+}
+.cta-sub {
+  font-size: clamp(.95rem, 1.6vw, 1.1rem); color: var(--text-3);
+  font-weight: 300; margin-bottom: 2rem;
+  font-family: var(--f-display);
+}
+.cta-chips { display: flex; flex-wrap: wrap; gap: .4rem; justify-content: center; margin-bottom: 1.25rem; }
+.cta-chip {
+  padding: .4rem .9rem; border-radius: 980px;
+  font-size: .78rem; border: 1px solid var(--border-2);
+  color: var(--text-3); cursor: pointer;
+  transition: all .2s; background: transparent; font-family: var(--f-body);
+}
+.cta-chip.active, .cta-chip:hover {
+  background: var(--accent-mid); border-color: rgba(167,139,250,.3); color: var(--accent);
+}
+.cta-btn-wrap { margin-bottom: 1.25rem; }
+.cta-note { font-size: .72rem; color: var(--text-3); letter-spacing: .04em; }
+
+/* ── FAQ ────────────────────────────────────── */
+.faq-section { background: var(--bg); }
+.faq-list {
+  max-width: 660px; margin: 0 auto;
+  border-radius: var(--r-xl); overflow: hidden;
+  border: 1px solid var(--border);
+}
+.faq-item { background: var(--bg-raised); border-bottom: 1px solid var(--border); }
+.faq-item:last-child { border-bottom: none; }
+.faq-q {
+  width: 100%; display: flex; align-items: center;
+  justify-content: space-between; gap: 1rem;
+  padding: 1.2rem 1.5rem; font-family: var(--f-body); font-size: .9rem;
+  font-weight: 500; color: var(--text); text-align: left;
+  transition: background .2s;
+}
+.faq-q:hover { background: var(--bg-hover); }
+.faq-q[aria-expanded="true"] { color: var(--accent); }
+.faq-icon { flex-shrink: 0; color: var(--text-3); transition: transform .3s var(--ease); }
+.faq-q[aria-expanded="true"] .faq-icon { transform: rotate(180deg); }
+.faq-a { max-height: 0; overflow: hidden; transition: max-height .4s var(--ease), padding .3s; }
+.faq-a.open { max-height: 280px; padding: 0 1.5rem 1.2rem; }
+.faq-a p { font-size: .84rem; color: var(--text-2); line-height: 1.8; }
+
+/* ── FOOTER ─────────────────────────────────── */
+.site-footer { background: var(--bg); border-top: 1px solid var(--border); padding: 3.5rem 0 0; }
+.footer-inner {
+  display: grid; grid-template-columns: 1.5fr 2fr;
+  gap: 4rem; padding-bottom: 2.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.footer-tagline { font-size: .85rem; color: var(--text-3); font-weight: 300; margin: .6rem 0; }
+.footer-note { font-size: .75rem; color: var(--text-3); line-height: 1.7; max-width: 30ch; margin-bottom: 1rem; }
+.footer-socials { display: flex; gap: .5rem; }
+.social-btn {
+  width: 32px; height: 32px; border-radius: var(--r-sm);
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-3); transition: all .2s;
+}
+.social-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+.footer-nav { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+.fn-title {
+  font-size: .65rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: .75rem;
+}
+.fn-list li { margin-bottom: .4rem; }
+.fn-list a { font-size: .82rem; color: var(--text-3); transition: color .2s; display: flex; align-items: center; gap: .3rem; }
+.fn-list a:hover { color: var(--white); }
+.footer-bottom { padding: 1.1rem 0; }
+.footer-copy { font-size: .72rem; color: var(--text-3); }
+
+/* ── TOAST ──────────────────────────────────── */
+.toast {
+  position: fixed; bottom: 2rem; left: 50%;
+  transform: translateX(-50%) translateY(calc(100% + 2rem));
+  background: var(--bg-card); border: 1px solid var(--border-2);
+  border-radius: var(--r-lg); padding: .8rem 1.3rem;
+  display: flex; align-items: center; gap: .5rem;
+  font-size: .84rem; font-weight: 500; color: var(--white);
+  z-index: 9998; transition: transform .35s var(--ease);
+  white-space: nowrap;
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+.toast-icon { color: var(--accent); }
+
+/* ── RESPONSIVE ─────────────────────────────── */
+@media (max-width: 1000px) {
+  .problem-grid { grid-template-columns: repeat(2, 1fr); }
+  .solution-inner { grid-template-columns: 1fr; }
+  .doc-visual { display: none; }
+  .feat-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+  .steps-grid::before { display: none; }
+  .trust-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-inner { grid-template-columns: 1fr; gap: 2rem; }
+}
+@media (max-width: 700px) {
+  .problem-grid { grid-template-columns: 1fr; gap: 0; }
+  .feat-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .trust-grid { grid-template-columns: 1fr; }
+  .disclaimer-body { grid-template-columns: 1fr; }
+  .disc-col:first-child { border-right: none; border-bottom: 1px solid var(--border); }
+  .nav-links, .nav-cta { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-links.mobile-open {
+    display: flex; flex-direction: column;
+    position: absolute; top: 100%; left: 0; right: 0;
+    padding: 1.5rem var(--pad);
+    background: rgba(17,17,19,.98);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    gap: .75rem;
+  }
+  .nav-links.mobile-open a { font-size: .95rem; color: var(--white); }
+  .footer-nav { grid-template-columns: 1fr 1fr; }
+  .trust-quote { padding: 1.5rem; }
+  .disclaimer-top { flex-direction: column; text-align: center; }
+  .bridge-inner { gap: 2rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+/* ── WIZARD OVERLAY ──────────────────────────── */
+.wizard-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--pad);
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s var(--ease);
+}
+.wizard-overlay.open { opacity: 1; pointer-events: auto; }
+.wizard {
+  background: var(--bg-raised);
+  border: 1px solid var(--border-2);
+  border-radius: var(--r-xl);
+  width: 100%; max-width: 520px;
+  overflow: hidden;
+  transform: translateY(20px) scale(.97);
+  transition: transform .35s var(--ease);
+}
+.wizard-overlay.open .wizard { transform: translateY(0) scale(1); }
+
+.wizard-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.wizard-progress {
+  display: flex; gap: .35rem;
+}
+.wizard-dot {
+  width: 24px; height: 3px; border-radius: 2px;
+  background: rgba(255,255,255,.08);
+  transition: background .3s;
+}
+.wizard-dot.active { background: var(--accent); }
+.wizard-dot.done { background: rgba(167,139,250,.35); }
+.wizard-close {
+  width: 28px; height: 28px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-3); transition: all .2s;
+}
+.wizard-close:hover { background: rgba(255,255,255,.06); color: var(--white); }
+
+.wizard-body {
+  padding: 2rem 1.5rem;
+  min-height: 280px;
+  max-height: 65vh;
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+}
+.wizard-step { display: none; flex-direction: column; gap: 1rem; flex: 1; }
+.wizard-step.active { display: flex; }
+
+.wizard-step-label {
+  font-size: .68rem; font-weight: 600; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--accent);
+}
+.wizard-step h3 {
+  font-size: 1.3rem; font-weight: 700; color: var(--white);
+  letter-spacing: -0.02em; line-height: 1.2;
+}
+.wizard-step p {
+  font-size: .85rem; color: var(--text-2); line-height: 1.6;
+}
+
+.wz-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.wz-chip {
+  padding: .5rem 1rem; border-radius: 980px;
+  font-size: .82rem; font-weight: 500;
+  border: 1px solid var(--border-2);
+  color: var(--text-3); cursor: pointer;
+  transition: all .2s; background: transparent;
+  font-family: var(--f-body);
+}
+.wz-chip.active {
+  background: var(--accent-mid);
+  border-color: rgba(167,139,250,.3);
+  color: var(--accent);
+}
+
+.wz-textarea {
+  width: 100%; min-height: 120px; padding: .9rem 1rem;
+  background: var(--bg-card); border: 1px solid var(--border-2);
+  border-radius: var(--r-md); color: var(--white);
+  font-family: var(--f-body); font-size: .875rem; line-height: 1.6;
+  resize: vertical; outline: none;
+  transition: border-color .2s;
+}
+.wz-textarea::placeholder { color: var(--text-3); }
+.wz-textarea:focus { border-color: var(--accent); }
+
+.wz-input {
+  width: 100%; padding: .8rem 1rem;
+  background: var(--bg-card); border: 1px solid var(--border-2);
+  border-radius: var(--r-md); color: var(--white);
+  font-family: var(--f-body); font-size: .875rem;
+  outline: none; transition: border-color .2s;
+}
+.wz-input::placeholder { color: var(--text-3); }
+.wz-input:focus { border-color: var(--accent); }
+
+.wz-options { display: flex; flex-direction: column; gap: .4rem; }
+.wz-option {
+  display: flex; align-items: center; gap: .6rem;
+  padding: .7rem 1rem; border-radius: var(--r-md);
+  border: 1px solid var(--border-2); cursor: pointer;
+  transition: all .2s; font-size: .85rem; color: var(--text-2);
+}
+.wz-option:hover { border-color: rgba(255,255,255,.15); background: rgba(255,255,255,.02); }
+.wz-option.active { border-color: rgba(167,139,250,.3); background: var(--accent-soft); color: var(--accent); }
+.wz-option-dot {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 1.5px solid var(--border-2); flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: all .2s;
+}
+.wz-option.active .wz-option-dot {
+  border-color: var(--accent); background: var(--accent);
+}
+.wz-option.active .wz-option-dot::after {
+  content: ''; width: 6px; height: 6px; border-radius: 50%;
+  background: var(--bg);
+}
+
+.wizard-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.wz-back {
+  font-size: .82rem; color: var(--text-3);
+  transition: color .2s; padding: .4rem 0;
+}
+.wz-back:hover { color: var(--white); }
+.wz-next {
+  padding: .65rem 1.5rem; border-radius: 980px;
+  background: var(--white); color: var(--ink);
+  font-size: .85rem; font-weight: 600;
+  transition: all .2s;
+}
+.wz-next:hover { background: rgba(245,245,247,.9); }
+.wz-next:disabled { opacity: .3; pointer-events: none; }
+
+/* Loading state */
+.wz-loading { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; min-height: 240px; text-align: center; }
+.wz-spinner {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 2px solid var(--border-2);
+  border-top-color: var(--accent);
+  animation: wz-spin .8s linear infinite;
+}
+@keyframes wz-spin { to { transform: rotate(360deg); } }
+.wz-loading p { font-size: .9rem; color: var(--text-2); }
+.wz-loading .wz-loading-sub { font-size: .78rem; color: var(--text-3); }
+
+/* Report output */
+.wz-report { display: flex; flex-direction: column; gap: 1rem; }
+.wz-report-section { padding: 1rem; background: var(--bg-card); border-radius: var(--r-md); border: 1px solid var(--border); }
+.wz-report-label { font-size: .65rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: .4rem; }
+.wz-report-text { font-size: .85rem; color: var(--text); line-height: 1.7; }
+.wz-report-highlight { border-left: 2px solid var(--accent); padding-left: .75rem; }
+.wz-report-cta { text-align: center; padding-top: .5rem; }
+.wz-report-note { font-size: .72rem; color: var(--text-3); text-align: center; margin-top: .5rem; }
+
+/* Premium upsell card */
+.wz-upsell {
+  background: var(--bg-card);
+  border: 1px solid rgba(167,139,250,.2);
+  border-radius: var(--r-lg);
+  padding: 1.25rem;
+  margin-top: .75rem;
+  position: relative; overflow: hidden;
+}
+.wz-upsell::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), rgba(167,139,250,.3));
+}
+.wz-upsell-badge {
+  display: inline-flex; align-items: center; gap: .3rem;
+  font-size: .62rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--accent);
+  background: var(--accent-soft); border-radius: 980px;
+  padding: .15rem .55rem; margin-bottom: .6rem;
+}
+.wz-upsell h4 {
+  font-size: 1rem; font-weight: 700; color: var(--white);
+  margin-bottom: .35rem; letter-spacing: -0.02em;
+}
+.wz-upsell-price {
+  font-size: .85rem; color: var(--text-2); margin-bottom: .75rem;
+}
+.wz-upsell-price strong {
+  font-size: 1.4rem; font-weight: 700; color: var(--white);
+  letter-spacing: -0.02em;
+}
+.wz-upsell-price .wz-price-compare {
+  text-decoration: line-through; color: var(--text-3); font-size: .78rem;
+  margin-left: .35rem;
+}
+.wz-upsell-list {
+  display: flex; flex-direction: column; gap: .3rem;
+  margin-bottom: .9rem;
+}
+.wz-upsell-item {
+  display: flex; align-items: flex-start; gap: .45rem;
+  font-size: .8rem; color: var(--text-2); line-height: 1.5;
+}
+.wz-upsell-check {
+  width: 15px; height: 15px; border-radius: 50%;
+  background: var(--accent); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: .1rem;
+}
+.wz-upsell-cta {
+  width: 100%; padding: .75rem;
+  background: var(--accent); color: var(--bg);
+  border-radius: var(--r-md);
+  font-size: .875rem; font-weight: 700;
+  display: flex; align-items: center; justify-content: center; gap: .4rem;
+  transition: all .2s;
+}
+.wz-upsell-cta:hover { background: var(--accent-dim); }
+.wz-upsell-skip {
+  display: block; text-align: center;
+  font-size: .75rem; color: var(--text-3);
+  margin-top: .6rem; transition: color .2s;
+}
+.wz-upsell-skip:hover { color: var(--white); }
+
+/* Free report blur overlay */
+.wz-report-locked { position: relative; }
+.wz-report-locked::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 0%, var(--bg-raised) 80%);
+  pointer-events: none;
+}
+.wz-report-locked .wz-report-section:nth-child(n+3) {
+  filter: blur(4px);
+  user-select: none;
+  pointer-events: none;
+}
+
+</style>
+</head>
+<body>
+
+<!-- Toast -->
+<div class="toast" id="toast" role="alert" aria-live="polite">
+  <svg class="toast-icon" width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 3a9 9 0 100 18A9 9 0 0012 3z" stroke="currentColor" stroke-width="1.5"/></svg>
+  <span id="toast-msg">Orientierung wird vorbereitet …</span>
+</div>
+
+<!-- Wizard Overlay -->
+<div class="wizard-overlay" id="wizard-overlay">
+  <div class="wizard" role="dialog" aria-label="Orientierung starten">
+    <div class="wizard-header">
+      <div class="wizard-progress" id="wz-progress">
+        <div class="wizard-dot active"></div>
+        <div class="wizard-dot"></div>
+        <div class="wizard-dot"></div>
+        <div class="wizard-dot"></div>
+      </div>
+      <button class="wizard-close" id="wz-close" aria-label="Schließen">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="wizard-body">
+      <!-- Step 1: Thema -->
+      <div class="wizard-step active" data-step="1">
+        <span class="wizard-step-label">Schritt 1 von 4</span>
+        <h3>Worum geht es bei dir?</h3>
+        <p>Wähle das Thema, das am besten passt.</p>
+        <div class="wz-chips" id="wz-topic-chips">
+          <button class="wz-chip active" data-wz-topic="Behördenbrief">Behördenbrief</button>
+          <button class="wz-chip" data-wz-topic="Vertrag">Vertrag</button>
+          <button class="wz-chip" data-wz-topic="Kündigung">Kündigung</button>
+          <button class="wz-chip" data-wz-topic="Frist / Mahnung">Frist / Mahnung</button>
+          <button class="wz-chip" data-wz-topic="Mietrecht">Mietrecht</button>
+          <button class="wz-chip" data-wz-topic="Arbeitgeber">Arbeitgeber</button>
+          <button class="wz-chip" data-wz-topic="Versicherung">Versicherung</button>
+          <button class="wz-chip" data-wz-topic="Sonstiges">Sonstiges</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Situation -->
+      <div class="wizard-step" data-step="2">
+        <span class="wizard-step-label">Schritt 2 von 4</span>
+        <h3>Was ist passiert?</h3>
+        <p>Beschreibe die Situation in eigenen Worten. Kein Fachjargon nötig.</p>
+        <textarea class="wz-textarea" id="wz-situation" placeholder="Ich habe einen Brief bekommen, in dem steht …"></textarea>
+      </div>
+
+      <!-- Step 3: Dringlichkeit -->
+      <div class="wizard-step" data-step="3">
+        <span class="wizard-step-label">Schritt 3 von 4</span>
+        <h3>Wie dringend ist es?</h3>
+        <p>Das hilft uns, relevante Fristen einzuordnen.</p>
+        <div class="wz-options" id="wz-urgency">
+          <div class="wz-option active" data-urgency="unklar">
+            <div class="wz-option-dot"></div>
+            Ich weiß nicht — genau deshalb bin ich hier
+          </div>
+          <div class="wz-option" data-urgency="frist">
+            <div class="wz-option-dot"></div>
+            Es gibt eine Frist, die bald abläuft
+          </div>
+          <div class="wz-option" data-urgency="neu">
+            <div class="wz-option-dot"></div>
+            Gerade erst bekommen, noch Zeit
+          </div>
+          <div class="wz-option" data-urgency="alt">
+            <div class="wz-option-dot"></div>
+            Liegt schon länger — ich hab es aufgeschoben
+          </div>
+        </div>
+      </div>
+
+      <!-- Step 4: E-Mail -->
+      <div class="wizard-step" data-step="4">
+        <span class="wizard-step-label">Schritt 4 von 4</span>
+        <h3>Wohin dürfen wir die Orientierung schicken?</h3>
+        <p>Du erhältst eine strukturierte Einordnung deiner Situation per E-Mail.</p>
+        <input class="wz-input" id="wz-email" type="email" placeholder="deine@email.de"/>
+        <div class="sol-disclaimer" style="margin-top:.25rem">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Keine Rechtsberatung · Keine Weitergabe deiner Daten
+        </div>
+      </div>
+
+      <!-- Step 5: Loading / Report -->
+      <div class="wizard-step" data-step="5">
+        <div class="wz-loading" id="wz-loading">
+          <div class="wz-spinner"></div>
+          <div>
+            <p>Deine Orientierung wird erstellt …</p>
+            <p class="wz-loading-sub">Situation einordnen · Fristen prüfen · Schritte ableiten</p>
+          </div>
+        </div>
+        <div class="wz-report" id="wz-report" style="display:none">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </div>
+
+    <div class="wizard-footer" id="wz-footer">
+      <button class="wz-back" id="wz-back" style="visibility:hidden">← Zurück</button>
+      <button class="wz-next" id="wz-next">Weiter</button>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header class="site-header" id="site-header" role="banner">
+  <nav class="nav-inner" aria-label="Hauptnavigation">
+    <a href="#" class="logo" aria-label="LAWYALTY Startseite">
+      <span class="logo-mark">LAWYALTY</span>
+    </a>
+    <ul class="nav-links" id="nav-links" role="list">
+      <li><a href="#problem">Problem</a></li>
+      <li><a href="#loesung">Lösung</a></li>
+      <li><a href="#so-funktioniert">Ablauf</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <a href="#cta" class="btn btn-primary nav-cta" style="padding:.6rem 1.3rem; font-size:.8rem;">Starten</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menü" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+</header>
+
+<main>
+
+<!-- HERO -->
+<section class="hero" id="home" aria-labelledby="hero-h1">
+  <div class="hero-inner">
+    <div class="hero-badge" role="note">
+      <div class="badge-dot" aria-hidden="true"></div>
+      Keine Kanzlei · Nur Orientierung
+    </div>
+
+    <h1 class="hero-h1" id="hero-h1">
+      Versteh deine<br>
+      rechtliche Situation.<br>
+      <span class="soft">Endlich wirklich.</span>
+    </h1>
+
+    <p class="hero-sub">
+      Einordnung, Vorbereitung, Klarheit — ohne Kanzlei-Hürde.<br>Für alle, die einen Brief auf dem Tisch haben und nicht weiterwissen.
+    </p>
+
+    <div class="hero-card" role="group" aria-labelledby="card-label">
+      <p class="card-label" id="card-label">Worum geht es?</p>
+      <div class="chip-row" role="radiogroup" aria-label="Thema auswählen">
+        <button class="chip active" data-topic="Behördenbrief">Behördenbrief</button>
+        <button class="chip" data-topic="Vertrag">Vertrag</button>
+        <button class="chip" data-topic="Kündigung">Kündigung</button>
+        <button class="chip" data-topic="Frist / Mahnung">Frist</button>
+        <button class="chip" data-topic="Sonstiges">Sonstiges</button>
+      </div>
+      <button class="hero-submit" id="hero-cta" type="button">
+        Orientierung starten
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="hero-actions">
+      <a href="#loesung" class="btn btn-secondary">
+        Mehr erfahren
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- BRIDGE -->
+<div class="bridge" aria-label="Fakten">
+  <div class="container bridge-inner">
+    <div class="bridge-stat reveal">
+      <div class="bridge-stat-num">1 von 3</div>
+      <div class="bridge-stat-label">Deutschen versteht mindestens einen Behördenbrief nicht vollständig</div>
+    </div>
+    <div class="bridge-stat reveal">
+      <div class="bridge-stat-num">68 %</div>
+      <div class="bridge-stat-label">der rechtlichen Probleme eskalieren, weil zu spät gehandelt wird</div>
+    </div>
+    <div class="bridge-stat reveal">
+      <div class="bridge-stat-num">0</div>
+      <div class="bridge-stat-label">Kanzlei-Hürde. Verstehen kommt vor Vertreten.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROBLEM -->
+<section class="problem-section light-section section" id="problem" aria-labelledby="problem-h2">
+  <div class="container">
+    <div class="section-header-block reveal">
+      <span class="section-eyebrow">Das Problem</span>
+      <h2 class="section-h2" id="problem-h2">Absichtlich <em>unverständlich.</em></h2>
+      <p class="section-body">Rechtliche Sprache macht Angst. Nicht weil du zu wenig weißt — sondern weil das System zu wenig erklärt.</p>
+    </div>
+    <div class="problem-grid">
+      <article class="p-card reveal">
+        <div class="p-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M7 8h10M7 12h7M7 16h5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Der Behördenbrief</h3>
+        <p>Amtsdeutsch, das einschüchtert statt informiert. Du weißt nicht, ob das eine Formalität oder ein ernstes Problem ist.</p>
+      </article>
+      <article class="p-card reveal">
+        <div class="p-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Die übersehene Frist</h3>
+        <p>14 Tage Widerspruchsfrist. Du hast es erst nach 3 Wochen gelesen. Die Uhr tickt.</p>
+      </article>
+      <article class="p-card reveal">
+        <div class="p-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Das Kleingedruckte</h3>
+        <p>Klauseln, die du nicht verstehst, binden dich für Jahre an Bedingungen, die du nie wolltest.</p>
+      </article>
+      <article class="p-card reveal">
+        <div class="p-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Die Kündigung</h3>
+        <p>Mietkündigung, Abmahnung, Versicherungsablehnung. Du weißt nicht, ob du dich wehren kannst.</p>
+      </article>
+      <article class="p-card reveal">
+        <div class="p-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Die Hemmschwelle</h3>
+        <p>Einen Anwalt anrufen fühlt sich groß an. Dabei brauchst du erstmal nur: Klarheit.</p>
+      </article>
+      <article class="p-card reveal">
+        <div class="p-icon" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" stroke="currentColor" stroke-width="1.5"/></svg></div>
+        <h3>Das Gefühl der Ohnmacht</h3>
+        <p>Das System wirkt so, als wäre es nicht für dich gemacht. LAWYALTY ist dafür gebaut, das zu ändern.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTION -->
+<section class="solution-section section" id="loesung" aria-labelledby="sol-h2">
+  <div class="container">
+    <div class="solution-inner">
+      <div class="reveal">
+        <span class="section-eyebrow">Was LAWYALTY ist</span>
+        <h2 class="section-h2" id="sol-h2">Verstehen. <em>Einordnen.</em><br>Dann handeln.</h2>
+        <p class="section-body">LAWYALTY ist kein Anwalt. LAWYALTY ist eine moderne Orientierungsplattform, die komplizierte Sprache in verständliche Einordnung übersetzt.</p>
+        <ul class="sol-list" role="list">
+          <li class="sol-item"><span class="sol-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Verständliche Einordnung deiner Situation</li>
+          <li class="sol-item"><span class="sol-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Orientierung zu Dokumenten, Fristen, Handlungsoptionen</li>
+          <li class="sol-item"><span class="sol-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Vorbereitung auf Gespräche mit Anwälten oder Behörden</li>
+          <li class="sol-item"><span class="sol-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Strukturierung deiner Unterlagen und deines Falls</li>
+          <li class="sol-item"><span class="sol-check" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>Mögliche nächste Schritte klar erkennen</li>
+        </ul>
+        <div class="sol-disclaimer">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v4M12 16h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          Keine Rechtsberatung · Keine anwaltliche Vertretung
+        </div>
+      </div>
+      <div class="doc-visual reveal" aria-hidden="true">
+        <div class="dv-card dv-card--a"></div>
+        <div class="dv-card dv-card--b">
+          <div class="dv-line dv-line--title"></div>
+          <div class="dv-line"></div>
+          <div class="dv-line dv-line--short"></div>
+          <div class="dv-line"></div>
+          <div class="dv-line dv-line--short"></div>
+        </div>
+        <div class="dv-card dv-card--c">
+          <div class="dv-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 3a9 9 0 100 18A9 9 0 0012 3z" stroke="currentColor" stroke-width="2"/></svg>
+            Eingeordnet
+          </div>
+          <div class="dv-line dv-line--title"></div>
+          <div class="dv-line"></div>
+          <div class="dv-anno">
+            <div class="dv-anno-title">Frist erkannt</div>
+            <div class="dv-anno-text">14 Tage Widerspruch möglich</div>
+          </div>
+          <div class="dv-anno" style="border-left-color:var(--green)">
+            <div class="dv-anno-title" style="color:var(--green)">Nächster Schritt</div>
+            <div class="dv-anno-text">Anwalt kontaktieren oder selbst reagieren</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features-section section" id="features" aria-labelledby="feat-h2">
+  <div class="container">
+    <div class="section-header-block reveal" style="text-align:center">
+      <span class="section-eyebrow">Was du bekommst</span>
+      <h2 class="section-h2" id="feat-h2">Klarheit. <em>Nicht Kompliziert.</em></h2>
+    </div>
+    <div class="feat-grid">
+      <article class="feat-card reveal">
+        <div class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M10 21H6a2 2 0 01-2-2V5a2 2 0 012-2h8l6 6v3" stroke="var(--text-2)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 15h6M19 12v6" stroke="var(--text-2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="feat-title">Dokumente einordnen</h3>
+        <p class="feat-desc">Versteh, womit du es zu tun hast — ohne Fachjargon.</p>
+      </article>
+      <article class="feat-card reveal">
+        <div class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="var(--text-2)" stroke-width="1.5"/><path d="M12 7v5l3 3" stroke="var(--text-2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="feat-title">Fristen erkennen</h3>
+        <p class="feat-desc">Sieh, was läuft — bevor die Zeit abläuft.</p>
+      </article>
+      <article class="feat-card feat-card--accent reveal">
+        <div class="feat-icon" style="background:rgba(167,139,250,.1)" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6-10l6-3m6 16l-6-3m6 3V7l-6-3" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="feat-title">Situation verstehen</h3>
+        <p class="feat-desc">Was ist das Kernproblem? Was gibt es zu beachten? Klar auf den Punkt.</p>
+      </article>
+      <article class="feat-card reveal">
+        <div class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M19 11H7M12 6l-5 5 5 5" stroke="var(--text-2)" stroke-width="1.5" stroke-linecap="round"/><path d="M21 19V5" stroke="var(--text-2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="feat-title">Fall strukturieren</h3>
+        <p class="feat-desc">Ordnung in deine Unterlagen — damit du und dein Anwalt sofort den Überblick haben.</p>
+      </article>
+      <article class="feat-card reveal">
+        <div class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17 20h5v-2a3 3 0 00-3-3h-2m-6 5H2v-2a3 3 0 013-3h4a3 3 0 013 3v2zm0 0v-2a3 3 0 013-3h0M9 11a4 4 0 100-8 4 4 0 000 8z" stroke="var(--text-2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="feat-title">Auf Anwalt vorbereiten</h3>
+        <p class="feat-desc">Geh informiert in das Gespräch. Wisse, was du fragen willst.</p>
+      </article>
+      <article class="feat-card reveal">
+        <div class="feat-icon" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 3L4 7v5c0 5.25 3.5 10 8 11 4.5-1 8-5.75 8-11V7l-8-4z" stroke="var(--text-2)" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3 class="feat-title">Klarheit statt Überforderung</h3>
+        <p class="feat-desc">Kein Fachjargon. Kein Einschüchtern. Direkt, verständlich, respektvoll.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how-section section" id="so-funktioniert" aria-labelledby="how-h2">
+  <div class="container">
+    <div class="section-header-block reveal" style="text-align:center">
+      <span class="section-eyebrow">So funktioniert's</span>
+      <h2 class="section-h2" id="how-h2">Vier Schritte. <em>Kein Umweg.</em></h2>
+      <p class="section-body" style="margin:0 auto">Vom Brief auf dem Tisch zur klaren Handlungsoption.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-item reveal">
+        <div class="step-num">01</div>
+        <h3 class="step-h">Situation beschreiben</h3>
+        <p class="step-p">Erkläre in eigenen Worten, was passiert ist. Einen Brief erhalten? Einen Vertrag bekommen?</p>
+      </div>
+      <div class="step-item reveal">
+        <div class="step-num">02</div>
+        <h3 class="step-h">Dokumente einordnen</h3>
+        <p class="step-p">Lade relevante Unterlagen hoch oder beschreibe sie. LAWYALTY hilft dir zu verstehen, was sie bedeuten.</p>
+      </div>
+      <div class="step-item reveal">
+        <div class="step-num">03</div>
+        <h3 class="step-h">Orientierung erhalten</h3>
+        <p class="step-p">Du erhältst eine klare Einordnung: Was ist das Kernproblem? Was sind mögliche Konsequenzen?</p>
+      </div>
+      <div class="step-item reveal">
+        <div class="step-num">04</div>
+        <h3 class="step-h">Nächsten Schritt erkennen</h3>
+        <p class="step-p">Am Ende weißt du, wo du stehst – ob Anwalt, Widerspruch oder Ruhe bewahren.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST -->
+<section class="trust-section section" aria-labelledby="trust-h2">
+  <div class="container">
+    <div class="section-header-block reveal" style="text-align:center">
+      <span class="section-eyebrow">Warum LAWYALTY</span>
+      <h2 class="section-h2" id="trust-h2">Kein Imponiergehabe.<br><em>Nur Klarheit.</em></h2>
+    </div>
+    <div class="trust-grid">
+      <div class="trust-pillar reveal">
+        <div class="trust-pillar-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Verständlich<br>statt kompliziert</h3>
+        <p>Kein Juristendeutsch. Wir erklären deine Situation in Sprache, die du wirklich verstehst.</p>
+      </div>
+      <div class="trust-pillar reveal">
+        <div class="trust-pillar-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Menschlich<br>statt einschüchternd</h3>
+        <p>Wir begegnen dir auf Augenhöhe. Deine Unsicherheit ist berechtigt – LAWYALTY löst sie auf.</p>
+      </div>
+      <div class="trust-pillar reveal">
+        <div class="trust-pillar-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M12 8v5l3 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>Schnell<br>statt bürokratisch</h3>
+        <p>Keine Terminbuchung, keine Wartezeit. Orientierung, wenn du sie brauchst.</p>
+      </div>
+      <div class="trust-pillar reveal">
+        <div class="trust-pillar-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 3L4 7v5c0 5.25 3.5 10 8 11 4.5-1 8-5.75 8-11V7l-8-4z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div>
+        <h3>An deiner Seite<br>bevor es zu spät ist</h3>
+        <p>Die meisten Fehler passieren aus Zeitdruck. LAWYALTY gibt dir den Kopf frei.</p>
+      </div>
+    </div>
+    <blockquote class="trust-quote reveal">
+      <span class="trust-quote-mark" aria-hidden="true">"</span>
+      <p>„Ich hatte wochenlang einen Brief auf dem Tisch, den ich nicht richtig verstanden habe. LAWYALTY hat mir in 20 Minuten gezeigt, worum es wirklich geht."</p>
+      <footer>
+        <div class="trust-quote-author">Nutzerin aus München</div>
+        <div class="trust-quote-note">Orientierung erhalten · keine Rechtsberatung</div>
+      </footer>
+    </blockquote>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="disclaimer-section section" id="abgrenzung" aria-labelledby="disc-h2">
+  <div class="container">
+    <div class="disclaimer-card reveal">
+      <div class="disclaimer-top">
+        <div class="disclaimer-shield" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 3L4 7v5c0 5.25 3.5 10 8 11 4.5-1 8-5.75 8-11V7l-8-4z" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <div>
+          <h2 id="disc-h2">Was wir sind. Was wir nicht sind.</h2>
+          <p>Volle Transparenz. Immer.</p>
+        </div>
+      </div>
+      <div class="disclaimer-body">
+        <div class="disc-col disc-col--no">
+          <div class="disc-col-title">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.5"/><path d="M8 8l8 8M16 8l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Was LAWYALTY <strong>nicht</strong> ist
+          </div>
+          <ul>
+            <li>Keine Rechtsanwaltskanzlei</li>
+            <li>Keine anwaltliche Beratung (RDG)</li>
+            <li>Keine rechtsverbindliche Prüfung</li>
+            <li>Keine Vertretung vor Gericht oder Behörden</li>
+            <li>Kein Ersatz für einen zugelassenen Anwalt</li>
+          </ul>
+        </div>
+        <div class="disc-col disc-col--yes">
+          <div class="disc-col-title">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"><path d="M9 12l2 2 4-4M12 3a9 9 0 100 18A9 9 0 0012 3z" stroke="currentColor" stroke-width="1.5"/></svg>
+            Was LAWYALTY <strong>ist</strong>
+          </div>
+          <ul>
+            <li>Allgemeine Orientierungsplattform</li>
+            <li>Verständliche Einordnung von Situationen</li>
+            <li>Vorbereitung auf Anwaltsgespräche</li>
+            <li>Strukturierungshilfe für Unterlagen</li>
+            <li>Orientierungsdienst nach § 5 RDG</li>
+          </ul>
+        </div>
+      </div>
+      <div class="disclaimer-footer">
+        Bei verbindlicher rechtlicher Prüfung, Vertretung oder bei konkretem Handlungsbedarf wende dich stets an einen zugelassenen Rechtsanwalt oder eine zugelassene Rechtsanwältin.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" id="cta" aria-labelledby="cta-h2">
+  <div class="container cta-inner">
+    <h2 class="cta-h2" id="cta-h2">Bereit für <em>Klarheit?</em></h2>
+    <p class="cta-sub reveal">Kein Anwalt. Aber an deiner Seite.</p>
+    <div class="cta-chips reveal">
+      <button class="cta-chip active" data-cta-topic="Behördenbrief">Behördenbrief</button>
+      <button class="cta-chip" data-cta-topic="Vertrag">Vertrag</button>
+      <button class="cta-chip" data-cta-topic="Kündigung">Kündigung</button>
+      <button class="cta-chip" data-cta-topic="Frist">Frist</button>
+      <button class="cta-chip" data-cta-topic="Sonstiges">Sonstiges</button>
+    </div>
+    <div class="cta-btn-wrap reveal">
+      <button class="btn btn-primary btn-lg" id="cta-submit" type="button">
+        Jetzt Orientierung starten
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <p class="cta-note reveal">Keine Anmeldung · Keine Rechtsberatung · Nur Orientierung</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section section" id="faq" aria-labelledby="faq-h2">
+  <div class="container">
+    <div class="section-header-block reveal" style="text-align:center">
+      <span class="section-eyebrow">Häufige Fragen</span>
+      <h2 class="section-h2" id="faq-h2">Fragen. <em>Antworten.</em></h2>
+    </div>
+    <div class="faq-list" role="list">
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" type="button">Ist LAWYALTY eine Kanzlei oder ein Anwalt?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a" role="region"><p>Nein. LAWYALTY ist weder eine Kanzlei noch ein Anwalt. LAWYALTY ist eine digitale Orientierungsplattform für Menschen, die ihre rechtliche Situation besser verstehen möchten.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" type="button">Ersetzt LAWYALTY einen Rechtsanwalt?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a" role="region"><p>Nein. LAWYALTY ist der Schritt davor: Orientierung, Einordnung und Vorbereitung. Wenn du rechtlich handeln musst, ist ein zugelassener Anwalt der richtige nächste Schritt.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" type="button">Wobei hilft LAWYALTY konkret?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a" role="region"><p>LAWYALTY hilft dir, Behördenbriefe, Verträge, Kündigungen und andere Dokumente verständlich einzuordnen. Du kannst damit Fristen sichtbar machen, deinen Fall strukturieren und mögliche nächste Schritte erkennen.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" type="button">Für wen ist LAWYALTY gedacht?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a" role="region"><p>Für alle Menschen, die sich von juristischer Sprache überfordert fühlen – egal ob Privatpersonen, Mieter oder Selbstständige. Du musst kein Jurist sein.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" type="button">Was passiert, wenn ich echte Rechtsberatung brauche?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a" role="region"><p>LAWYALTY weist dich klar darauf hin, wenn ein Anwalt notwendig ist. Wir helfen dir, gut vorbereitet in das Gespräch zu gehen.</p></div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-q" aria-expanded="false" type="button">Wie sicher sind meine Daten?<svg class="faq-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></button>
+        <div class="faq-a" role="region"><p>Alle Daten werden ausschließlich nach deutschem und europäischem Datenschutzrecht (DSGVO) verarbeitet. Details in unserer Datenschutzerklärung.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <a href="#" class="logo" aria-label="LAWYALTY Startseite">
+          <span class="logo-mark">LAWYALTY</span>
+        </a>
+        <p class="footer-tagline">Rechtsorientierung. Kein Anwalt, aber an deiner Seite.</p>
+        <p class="footer-note">LAWYALTY ist keine Kanzlei und bietet keine anwaltliche Rechtsberatung an.</p>
+        <div class="footer-socials" aria-label="Social Media">
+          <a href="#" class="social-btn" aria-label="LinkedIn"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/></svg></a>
+          <a href="#" class="social-btn" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+        </div>
+      </div>
+      <nav class="footer-nav" aria-label="Footer Navigation">
+        <div>
+          <div class="fn-title">Plattform</div>
+          <ul class="fn-list">
+            <li><a href="#loesung">Was ist LAWYALTY</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#so-funktioniert">So funktioniert's</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="fn-title">Rechtliches</div>
+          <ul class="fn-list">
+            <li><a href="/impressum">Impressum</a></li>
+            <li><a href="/datenschutz">Datenschutz</a></li>
+            <li><a href="/agb">AGB</a></li>
+            <li><a href="/abgrenzung">Abgrenzung RDG</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="fn-title">Kontakt</div>
+          <ul class="fn-list">
+            <li><a href="/cdn-cgi/l/email-protection#7b131a1717143b171a0c021a170f02551f1e"><span class="__cf_email__" data-cfemail="4921282525260925283e3028253d30672d2c">[email&#160;protected]</span></a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">&copy; <span id="yr"></span> LAWYALTY · Keine Kanzlei · Nur Orientierung · HIGHERPlan GmbH</p>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+'use strict';
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// Sticky Header
+(function(){
+  const h = document.getElementById('site-header');
+  window.addEventListener('scroll', () => h.classList.toggle('scrolled', window.scrollY > 30), {passive:true});
+})();
+
+// Mobile Nav
+(function(){
+  const toggle = document.getElementById('nav-toggle');
+  const links  = document.getElementById('nav-links');
+  const close = () => { toggle.classList.remove('open'); links.classList.remove('mobile-open'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; };
+  toggle.addEventListener('click', () => {
+    const open = toggle.classList.toggle('open');
+    links.classList.toggle('mobile-open', open);
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.body.style.overflow = open ? 'hidden' : '';
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+  document.addEventListener('keydown', e => { if(e.key==='Escape') close(); });
+})();
+
+// Smooth Scroll
+(function(){
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href').slice(1);
+      if(!id) return;
+      const t = document.getElementById(id);
+      if(!t) return;
+      e.preventDefault();
+      const hh = document.getElementById('site-header').offsetHeight;
+      window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - hh - 12, behavior:'smooth' });
+    });
+  });
+})();
+
+// Scroll Reveals — force visible immediately, animate on live site via IO
+(function(){
+  const els = document.querySelectorAll('.reveal');
+  // Immediate visibility for iframe/preview contexts
+  els.forEach(e => e.classList.add('visible'));
+})();
+
+// Chips
+(function(){
+  function initChips(sel){
+    document.querySelectorAll(sel).forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll(sel).forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+      });
+    });
+  }
+  initChips('[data-topic]');
+  initChips('[data-cta-topic]');
+})();
+
+// Toast
+function showToast(msg){
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._t);
+  t._t = setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+// CTAs → open wizard
+function openWizard(topic) {
+  const overlay = document.getElementById('wizard-overlay');
+  // Pre-select topic
+  if(topic) {
+    document.querySelectorAll('[data-wz-topic]').forEach(c => c.classList.remove('active'));
+    const match = document.querySelector('[data-wz-topic="'+topic+'"]');
+    if(match) match.classList.add('active');
+  }
+  wizardStep = 1;
+  updateWizard();
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+document.getElementById('hero-cta').addEventListener('click', () => {
+  const chip = document.querySelector('[data-topic].active');
+  openWizard(chip ? chip.dataset.topic : null);
+});
+document.getElementById('cta-submit').addEventListener('click', () => {
+  const chip = document.querySelector('[data-cta-topic].active');
+  openWizard(chip ? (chip.dataset.ctaTopic || chip.textContent.trim()) : null);
+});
+
+// Wizard Logic
+let wizardStep = 1;
+const totalSteps = 4;
+
+function closeWizard() {
+  document.getElementById('wizard-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  // Reset after animation
+  setTimeout(() => {
+    wizardStep = 1;
+    updateWizard();
+    document.getElementById('wz-loading').style.display = '';
+    document.getElementById('wz-report').style.display = 'none';
+    document.getElementById('wz-report').innerHTML = '';
+    document.getElementById('wz-situation').value = '';
+    document.getElementById('wz-email').value = '';
+  }, 400);
+}
+
+document.getElementById('wz-close').addEventListener('click', closeWizard);
+document.getElementById('wizard-overlay').addEventListener('click', e => {
+  if(e.target === e.currentTarget) closeWizard();
+});
+document.addEventListener('keydown', e => { if(e.key === 'Escape') closeWizard(); });
+
+// Topic chips
+document.querySelectorAll('[data-wz-topic]').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('[data-wz-topic]').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+
+// Urgency options
+document.querySelectorAll('#wz-urgency .wz-option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    document.querySelectorAll('#wz-urgency .wz-option').forEach(o => o.classList.remove('active'));
+    opt.classList.add('active');
+  });
+});
+
+function updateWizard() {
+  // Steps
+  document.querySelectorAll('.wizard-step').forEach(s => s.classList.remove('active'));
+  const step = document.querySelector('[data-step="'+wizardStep+'"]');
+  if(step) step.classList.add('active');
+
+  // Progress dots
+  document.querySelectorAll('.wizard-dot').forEach((dot, i) => {
+    dot.classList.remove('active','done');
+    if(i + 1 === wizardStep) dot.classList.add('active');
+    else if(i + 1 < wizardStep) dot.classList.add('done');
+  });
+
+  // Back button
+  document.getElementById('wz-back').style.visibility = wizardStep <= 1 ? 'hidden' : 'visible';
+
+  // Next button
+  const next = document.getElementById('wz-next');
+  const footer = document.getElementById('wz-footer');
+  if(wizardStep === 4) {
+    next.textContent = 'Orientierung erstellen';
+  } else if(wizardStep === 5) {
+    footer.style.display = 'none';
+  } else {
+    next.textContent = 'Weiter';
+    footer.style.display = '';
+  }
+}
+
+document.getElementById('wz-back').addEventListener('click', () => {
+  if(wizardStep > 1) { wizardStep--; updateWizard(); }
+});
+
+document.getElementById('wz-next').addEventListener('click', () => {
+  if(wizardStep < 5) {
+    wizardStep++;
+    updateWizard();
+    if(wizardStep === 5) generateReport();
+  }
+});
+
+function generateReport() {
+  const topic = document.querySelector('[data-wz-topic].active')?.dataset.wzTopic || 'Allgemein';
+  const situation = document.getElementById('wz-situation').value || 'Keine Details angegeben';
+  const urgency = document.querySelector('#wz-urgency .wz-option.active')?.dataset.urgency || 'unklar';
+  const email = document.getElementById('wz-email').value;
+
+  const urgencyMap = {
+    'unklar': 'Dringlichkeit unklar — genauere Prüfung empfohlen',
+    'frist': 'Möglicherweise fristgebunden — schnelles Handeln empfohlen',
+    'neu': 'Frisch erhalten — du hast wahrscheinlich noch Handlungsspielraum',
+    'alt': 'Aufgeschoben — prüfe, ob Fristen bereits verstrichen sind'
+  };
+
+  setTimeout(() => {
+    document.getElementById('wz-loading').style.display = 'none';
+    const report = document.getElementById('wz-report');
+    report.style.display = '';
+    report.innerHTML = `
+      <span class="wizard-step-label">Kostenlose Ersteinordnung</span>
+      <h3 style="margin-bottom:.25rem">Thema: ${topic}</h3>
+
+      <div class="wz-report-section">
+        <div class="wz-report-label">Deine Situation</div>
+        <div class="wz-report-text">${situation.length > 10 ? situation : 'Du hast ein Thema im Bereich „'+topic+'" angegeben.'}</div>
+      </div>
+
+      <div class="wz-report-section wz-report-highlight">
+        <div class="wz-report-label">Einschätzung zur Dringlichkeit</div>
+        <div class="wz-report-text">${urgencyMap[urgency]}</div>
+      </div>
+
+      <div class="wz-report-locked">
+        <div class="wz-report-section">
+          <div class="wz-report-label">Detaillierte Einordnung</div>
+          <div class="wz-report-text">Basierend auf deiner Beschreibung handelt es sich möglicherweise um einen Fall im Bereich ${topic}. Eine genaue rechtliche Einordnung deiner Situation mit konkreten Handlungsoptionen erhältst du im Premium-Report.</div>
+        </div>
+        <div class="wz-report-section">
+          <div class="wz-report-label">Konkrete nächste Schritte</div>
+          <div class="wz-report-text">1. Individuelle Fristen-Analyse für deinen Fall 2. Checkliste für dein Anwaltsgespräch 3. Strukturierte Dokumentenübersicht 4. Konkrete Handlungsempfehlung</div>
+        </div>
+        <div class="wz-report-section">
+          <div class="wz-report-label">Checkliste Anwaltsgespräch</div>
+          <div class="wz-report-text">Welche Fragen du stellen solltest, welche Unterlagen du mitbringen musst, und worauf du achten solltest.</div>
+        </div>
+      </div>
+
+      <div class="wz-upsell">
+        <div class="wz-upsell-badge">Premium-Report</div>
+        <h4>Vollständige Orientierung für deinen Fall</h4>
+        <div class="wz-upsell-price">
+          <strong>19 €</strong> einmalig
+          <span class="wz-price-compare">Erstberatung Anwalt: ab 190 €</span>
+        </div>
+        <div class="wz-upsell-list">
+          <div class="wz-upsell-item">
+            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Individuelle Analyse deiner Situation
+          </div>
+          <div class="wz-upsell-item">
+            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Fristen erkannt und eingeordnet
+          </div>
+          <div class="wz-upsell-item">
+            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Konkrete Handlungsschritte für deinen Fall
+          </div>
+          <div class="wz-upsell-item">
+            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Checkliste für dein Anwaltsgespräch
+          </div>
+          <div class="wz-upsell-item">
+            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+            Strukturierte Zusammenfassung als PDF
+          </div>
+        </div>
+        <button class="wz-upsell-cta" onclick="window.location.href='https://buy.stripe.com/eVq7sM0jM4qZ1lKd5wdnW00'">
+          Premium-Report freischalten — 19 €
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </button>
+        <button class="wz-upsell-skip" onclick="closeWizard()">Erstmal nur die kostenlose Version</button>
+      </div>
+
+      <div class="wz-report-section" style="background:var(--accent-soft); border-color:rgba(167,139,250,.15); margin-top:.5rem">
+        <div class="wz-report-label">Hinweis</div>
+        <div class="wz-report-text">Dies ist eine allgemeine Erstorientierung, keine Rechtsberatung. Bei konkretem Handlungsbedarf wende dich an einen zugelassenen Rechtsanwalt.</div>
+      </div>
+
+      <p class="wz-report-note">LAWYALTY · Keine Kanzlei · Nur Orientierung · § 5 RDG</p>
+    `;
+    document.getElementById('wz-footer').style.display = 'none';
+  }, 2500);
+}
+
+// FAQ
+(function(){
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded')==='true';
+      document.querySelectorAll('.faq-q').forEach(b => { b.setAttribute('aria-expanded','false'); b.nextElementSibling.classList.remove('open'); });
+      if(!open){ btn.setAttribute('aria-expanded','true'); btn.nextElementSibling.classList.add('open'); }
+    });
+  });
+})();
+</script>
+</body>
+</html>

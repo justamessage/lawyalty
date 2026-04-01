@@ -1,0 +1,6 @@
+# SPA-style clean URLs
+/impressum        /impressum/index.html    200
+/datenschutz      /datenschutz/index.html  200
+/agb              /agb/index.html          200
+/abgrenzung       /abgrenzung/index.html   200
+/danke            /danke/index.html        200
