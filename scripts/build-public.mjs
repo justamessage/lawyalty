@@ -15,7 +15,7 @@ const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
 
 /** Öffentliche Seiten und Assets (Dateien oder ganze Ordner). */
-export const OEFFENTLICH = ['index.html', 'favicon.svg', 'robots.txt', '_redirects'];
+export const OEFFENTLICH = ['index.html', 'favicon.svg', 'robots.txt'];
 
 /** Repo-Interna: werden nie ausgeliefert. Punktdateien/-ordner sind immer intern. */
 export const INTERN = ['README.md', 'netlify.toml', 'scripts', 'node_modules', 'dist'];

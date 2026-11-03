@@ -1,5 +1,9 @@
 # LAWYALTY
 
+> **Geparkte Idee – kein Verkauf, kein Livebetrieb.** Vor einem Neustart: Impressum, Datenschutz, AGB/Widerruf und Liefermechanismus.
+>
+> Stand 03.11.2026: Kaufknopf und Stripe-Link sind von der Seite entfernt, die Seite steht auf noindex. Die toten Footer-Links und `_redirects` sind entfernt. Die Abschnitte unten beschreiben den alten Plan.
+
 Rechtsorientierung. Kein Anwalt, aber an deiner Seite.
 
 ## Repo-Struktur

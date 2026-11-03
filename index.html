@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>LAWYALTY – Rechtsorientierung. Kein Anwalt, aber an deiner Seite.</title>
 <meta name="description" content="LAWYALTY hilft dir, rechtliche Situationen, Briefe und Dokumente verständlich einzuordnen – klar, menschlich und ohne Kanzlei-Hürde."/>
-<meta name="robots" content="index, follow"/>
+<meta name="robots" content="noindex, nofollow"/>
 <meta property="og:title" content="LAWYALTY – Rechtsorientierung. Kein Anwalt, aber an deiner Seite."/>
 <meta property="og:description" content="LAWYALTY hilft dir, rechtliche Situationen, Briefe und Dokumente verständlich einzuordnen – klar, menschlich und ohne Kanzlei-Hürde."/>
 <meta property="og:type" content="website"/>
@@ -782,85 +782,15 @@ em { font-style: normal; color: var(--text-2); }
 .wz-report-cta { text-align: center; padding-top: .5rem; }
 .wz-report-note { font-size: .72rem; color: var(--text-3); text-align: center; margin-top: .5rem; }
 
-/* Premium upsell card */
-.wz-upsell {
-  background: var(--bg-card);
-  border: 1px solid rgba(167,139,250,.2);
-  border-radius: var(--r-lg);
-  padding: 1.25rem;
-  margin-top: .75rem;
-  position: relative; overflow: hidden;
-}
-.wz-upsell::before {
-  content: '';
-  position: absolute; top: 0; left: 0; right: 0; height: 2px;
-  background: linear-gradient(90deg, var(--accent), rgba(167,139,250,.3));
-}
-.wz-upsell-badge {
-  display: inline-flex; align-items: center; gap: .3rem;
-  font-size: .62rem; font-weight: 700; letter-spacing: .1em;
-  text-transform: uppercase; color: var(--accent);
-  background: var(--accent-soft); border-radius: 980px;
-  padding: .15rem .55rem; margin-bottom: .6rem;
-}
-.wz-upsell h4 {
-  font-size: 1rem; font-weight: 700; color: var(--white);
-  margin-bottom: .35rem; letter-spacing: -0.02em;
-}
-.wz-upsell-price {
-  font-size: .85rem; color: var(--text-2); margin-bottom: .75rem;
-}
-.wz-upsell-price strong {
-  font-size: 1.4rem; font-weight: 700; color: var(--white);
-  letter-spacing: -0.02em;
-}
-.wz-upsell-price .wz-price-compare {
-  text-decoration: line-through; color: var(--text-3); font-size: .78rem;
-  margin-left: .35rem;
-}
-.wz-upsell-list {
-  display: flex; flex-direction: column; gap: .3rem;
-  margin-bottom: .9rem;
-}
-.wz-upsell-item {
-  display: flex; align-items: flex-start; gap: .45rem;
-  font-size: .8rem; color: var(--text-2); line-height: 1.5;
-}
-.wz-upsell-check {
-  width: 15px; height: 15px; border-radius: 50%;
-  background: var(--accent); display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: .1rem;
-}
-.wz-upsell-cta {
-  width: 100%; padding: .75rem;
-  background: var(--accent); color: var(--bg);
-  border-radius: var(--r-md);
-  font-size: .875rem; font-weight: 700;
-  display: flex; align-items: center; justify-content: center; gap: .4rem;
-  transition: all .2s;
-}
-.wz-upsell-cta:hover { background: var(--accent-dim); }
-.wz-upsell-skip {
+/* Bericht schließen */
+.wz-close-report {
   display: block; text-align: center;
   font-size: .75rem; color: var(--text-3);
   margin-top: .6rem; transition: color .2s;
 }
-.wz-upsell-skip:hover { color: var(--white); }
+.wz-close-report:hover { color: var(--white); }
 
 /* Free report blur overlay */
-.wz-report-locked { position: relative; }
-.wz-report-locked::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 0%, var(--bg-raised) 80%);
-  pointer-events: none;
-}
-.wz-report-locked .wz-report-section:nth-child(n+3) {
-  filter: blur(4px);
-  user-select: none;
-  pointer-events: none;
-}
-
 </style>
 </head>
 <body>
@@ -1396,10 +1326,7 @@ em { font-style: normal; color: var(--text-2); }
         <div>
           <div class="fn-title">Rechtliches</div>
           <ul class="fn-list">
-            <li><a href="/impressum">Impressum</a></li>
-            <li><a href="/datenschutz">Datenschutz</a></li>
-            <li><a href="/agb">AGB</a></li>
-            <li><a href="/abgrenzung">Abgrenzung RDG</a></li>
+            <li><a href="#abgrenzung">Abgrenzung RDG</a></li>
           </ul>
         </div>
         <div>
@@ -1610,7 +1537,7 @@ function generateReport() {
     const report = document.getElementById('wz-report');
     report.style.display = '';
     report.innerHTML = `
-      <span class="wizard-step-label">Kostenlose Ersteinordnung</span>
+      <span class="wizard-step-label">Erste Einordnung</span>
       <h3 style="margin-bottom:.25rem">Thema: ${topic}</h3>
 
       <div class="wz-report-section">
@@ -1623,63 +1550,14 @@ function generateReport() {
         <div class="wz-report-text">${urgencyMap[urgency]}</div>
       </div>
 
-      <div class="wz-report-locked">
-        <div class="wz-report-section">
-          <div class="wz-report-label">Detaillierte Einordnung</div>
-          <div class="wz-report-text">Basierend auf deiner Beschreibung handelt es sich möglicherweise um einen Fall im Bereich ${topic}. Eine genaue rechtliche Einordnung deiner Situation mit konkreten Handlungsoptionen erhältst du im Premium-Report.</div>
-        </div>
-        <div class="wz-report-section">
-          <div class="wz-report-label">Konkrete nächste Schritte</div>
-          <div class="wz-report-text">1. Individuelle Fristen-Analyse für deinen Fall 2. Checkliste für dein Anwaltsgespräch 3. Strukturierte Dokumentenübersicht 4. Konkrete Handlungsempfehlung</div>
-        </div>
-        <div class="wz-report-section">
-          <div class="wz-report-label">Checkliste Anwaltsgespräch</div>
-          <div class="wz-report-text">Welche Fragen du stellen solltest, welche Unterlagen du mitbringen musst, und worauf du achten solltest.</div>
-        </div>
-      </div>
-
-      <div class="wz-upsell">
-        <div class="wz-upsell-badge">Premium-Report</div>
-        <h4>Vollständige Orientierung für deinen Fall</h4>
-        <div class="wz-upsell-price">
-          <strong>19 €</strong> einmalig
-          <span class="wz-price-compare">Erstberatung Anwalt: ab 190 €</span>
-        </div>
-        <div class="wz-upsell-list">
-          <div class="wz-upsell-item">
-            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            Individuelle Analyse deiner Situation
-          </div>
-          <div class="wz-upsell-item">
-            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            Fristen erkannt und eingeordnet
-          </div>
-          <div class="wz-upsell-item">
-            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            Konkrete Handlungsschritte für deinen Fall
-          </div>
-          <div class="wz-upsell-item">
-            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            Checkliste für dein Anwaltsgespräch
-          </div>
-          <div class="wz-upsell-item">
-            <div class="wz-upsell-check"><svg width="8" height="8" viewBox="0 0 16 16" fill="none"><path d="M3 8l3.5 3.5L13 4" stroke="var(--bg)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            Strukturierte Zusammenfassung als PDF
-          </div>
-        </div>
-        <button class="wz-upsell-cta" onclick="window.location.href='https://buy.stripe.com/eVq7sM0jM4qZ1lKd5wdnW00'">
-          Premium-Report freischalten — 19 €
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-        </button>
-        <button class="wz-upsell-skip" onclick="closeWizard()">Erstmal nur die kostenlose Version</button>
-      </div>
-
       <div class="wz-report-section" style="background:var(--accent-soft); border-color:rgba(167,139,250,.15); margin-top:.5rem">
         <div class="wz-report-label">Hinweis</div>
         <div class="wz-report-text">Dies ist eine allgemeine Erstorientierung, keine Rechtsberatung. Bei konkretem Handlungsbedarf wende dich an einen zugelassenen Rechtsanwalt.</div>
       </div>
 
       <p class="wz-report-note">LAWYALTY · Keine Kanzlei · Nur Orientierung · § 5 RDG</p>
+
+      <button class="wz-close-report" onclick="closeWizard()">Schließen</button>
     `;
     document.getElementById('wz-footer').style.display = 'none';
   }, 2500);
